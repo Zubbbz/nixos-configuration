@@ -9,6 +9,7 @@
     [
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      <home-manager/nixos>
     ];
 
   nix = {
@@ -119,6 +120,21 @@
     };
   };
 
+  systemd = {
+    user.services.polkit-gnome-authentication-agent-1 = {
+      description = "polkit-gnome-authentication-agent-1";
+      wantedBy = [ "graphical-session.target" ];
+      wants = [ "graphical-session.target" ];
+      after = [ "graphical-session.target" ];
+      serviceConfig = {
+        Type = "simple";
+        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+        Restart = "on-failure";
+        RestartSec = 1;
+        TimeoutStopSec = 10;
+      };
+    };
+  };
 
   # Enable sound with pipewire.
   sound.enable = true;
@@ -140,13 +156,7 @@
   hardware.bluetooth.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.nathan = {
-    isNormalUser = true;
-    description = "nathan";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-    ];
-  };
+  users.users.nathan.isNormalUser = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -177,6 +187,13 @@
 
   nixpkgs.config.permittedInsecurePackages = [
     "electron-25.9.0"
+  ];
+
+  fonts.packages = with pkgs; [
+    noto-fonts
+    noto-fonts-cjk
+    noto-fonts-emoji
+    (nerdfonts.override { fonts = [ "FiraCode" "SourceCodePro" ]; })
   ];
 
   programs.nix-ld = {
