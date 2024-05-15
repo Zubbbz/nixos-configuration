@@ -156,7 +156,11 @@
   hardware.bluetooth.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.nathan.isNormalUser = true;
+  users.users.nathan = {
+    isNormalUser = true;
+    description = "nathan";
+    extraGroups = [ "networkmanager" "wheel" ];
+  };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
