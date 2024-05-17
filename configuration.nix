@@ -172,6 +172,8 @@
     wget
     librewolf
     mullvad-browser
+    tor-browser
+    protonvpn-gui
     gnupg
     veracrypt
     neovim
