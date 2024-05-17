@@ -146,7 +146,7 @@
     alsa.support32Bit = true;
     pulse.enable = true;
     # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
+    jack.enable = true;
 
     # use the example session manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
@@ -189,6 +189,13 @@
     zulu8
     zulu17
     gparted
+
+    waybar
+    dunst
+    libnotify
+    swww
+    rofi-wayland
+    networkmanagerapplet
   ];
 
   nixpkgs.config.permittedInsecurePackages = [
@@ -202,12 +209,23 @@
     (nerdfonts.override { fonts = [ "FiraCode" "SourceCodePro" ]; })
   ];
 
-  programs.nix-ld = {
-    enable = true;
-    libraries = with pkgs; [
-      # Add any missin dynamic libraries for unpackaged
-      # programs here, NOT in environment.systemPackages
-    ];
+  xdg = {
+    portal = {
+      enable = true;
+      extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    };
+  };
+
+  programs = {
+    hyprland.enable = true;
+
+    nix-ld = {
+      enable = true;
+      libraries = with pkgs; [
+        # Add any missing dynamic libraries for unpackaged
+        # programs here, NOT in environment.systemPackages
+      ];
+    };
   };
 
   # Some programs need SUID wrappers, can be configured further or are
