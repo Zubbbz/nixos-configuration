@@ -111,10 +111,10 @@
 
     resolved = {
       enable = true;
-          dnssec = "true";
-          domains = [ "~."];
-          fallbackDns = [ "194.242.2.2" "9.9.9.10" ];
-          dnsovertls = "true";
+#         dnssec = "true";
+#         domains = [ "~."];
+#         fallbackDns = [ "194.242.2.2" "9.9.9.10" ];
+#         dnsovertls = "true";
     };
   };
 
