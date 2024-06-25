@@ -104,17 +104,17 @@
     # Enable CUPS to print documents.
     printing.enable = true;
 
-    mullvad-vpn = {
-      enable = true;
-      package = pkgs.mullvad-vpn;
-    };
+  #  mullvad-vpn = {
+  #    enable = true;
+  #    package = pkgs.mullvad-vpn;
+  #  };
 
     resolved = {
       enable = true;
-      #    dnssec = "true";
-      #    domains = [ "~."];
-      #    fallbackDns = [ "1.1.1.1#one.one.one.one" "1.0.0.1#one.one.one.one" ];
-      #    dnsovertls = "true";
+          dnssec = "true";
+          domains = [ "~."];
+          fallbackDns = [ "194.242.2.2" "9.9.9.10" ];
+          dnsovertls = "true";
     };
   };
 
