@@ -77,29 +77,27 @@
   };
 
   services = {
+
+    # Enable touchpad support (enabled default in most desktopManager).
+    libinput.enable = true;
+
+    displayManager = {
+      sddm.enable = true;
+      defaultSession = "plasma";
+    };
+
     xserver = {
       enable = true;
 
-      # Enable touchpad support (enabled default in most desktopManager).
-      libinput.enable = true;
-
       # Configure keymap in X11
-      layout = "us";
-      xkbVariant = "";
-
-      displayManager.sddm.enable = true;
-      desktopManager.plasma5.enable = true;
-
-      windowManager.i3 = {
-        enable = true;
-        extraPackages = with pkgs; [
-          dmenu
-          i3status
-          i3lock
-          i3blocks
-        ];
+      xkb = {
+        layout = "us";
+        variant = "";
       };
 
+      desktopManager = {
+        plasma5.enable = true;
+      };
     };
 
 
