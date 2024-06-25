@@ -219,6 +219,8 @@
   programs = {
     hyprland.enable = true;
 
+    dconf.enable = true;
+
     nix-ld = {
       enable = true;
       libraries = with pkgs; [
