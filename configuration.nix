@@ -160,8 +160,21 @@
     extraGroups = [ "networkmanager" "wheel" ];
   };
 
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
+
+  nixpkgs = {
+    config = {
+      # Allow unfree packages
+      allowUnfree = true;
+
+      permittedInsecurePackages = [
+        "electron-25.9.0"
+      ];
+    };
+
+    overlays = import ./overlays/nixpkgs-overlays.nix;
+  };
+
+  environment.pathsToLink = [ "/share/bash-completion" ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -194,10 +207,6 @@
     swww
     rofi-wayland
     networkmanagerapplet
-  ];
-
-  nixpkgs.config.permittedInsecurePackages = [
-    "electron-25.9.0"
   ];
 
   fonts.packages = with pkgs; [
